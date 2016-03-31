@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.1
 
 ApplicationWindow {
     id: mainWindow
@@ -32,6 +33,34 @@ ApplicationWindow {
         width: height*0.7
         border.color: "black"
         border.width: 1
+
+        GridView{
+            id: grid
+            anchors.fill: parent
+            //anchors.centerIn: parent
+            //width: 08*parent.width
+            //height: width
+            cellHeight: height/3
+            cellWidth: width/3
+
+            model: boardModel
+            delegate: Component{
+                Item{
+                    width: grid.cellWidth
+                    height: grid.cellHeight
+                    Rectangle{
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        color: "gray"
+
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked: boardModel.setSymbol("x", index);
+                        }
+                    }
+                }
+            }
+        }
 
         Rectangle{
             id: foldedPage
@@ -150,6 +179,13 @@ ApplicationWindow {
                     }
                 }
             }
+        }
+
+        Rectangle{
+            anchors.left: foldedPage.left
+            anchors.right: foldedPage.right
+            anchors.bottom: pageRect.bottom
+            anchors.top: foldedPage.bottom
         }
     }
 }
