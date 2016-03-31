@@ -29,6 +29,7 @@ signals:
 public slots:
     void setSymbol(QString symbol, int row);
     QString symbolAt(int row)const;
+    void clearBoard();
 
 protected:
     QVector<QString> m_items;

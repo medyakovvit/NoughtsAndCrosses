@@ -64,3 +64,11 @@ QString BoardModel::symbolAt(int row) const
 {
     return data(createIndex(row, 0), SYMBOL).toString();
 }
+
+void BoardModel::clearBoard()
+{
+    for(int i=0; i<m_items.size(); i++)
+    {
+        this->setData(createIndex(i, 0), QVariant(), Qt::EditRole);
+    }
+}

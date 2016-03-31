@@ -18,7 +18,8 @@ Item {
                 Rectangle{
                     anchors.fill: parent
                     anchors.margins: 10
-                    color: "gray"
+                    border.color: "black"
+                    border.width: 1
 
                     MouseArea{
                         anchors.fill: parent

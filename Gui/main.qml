@@ -13,14 +13,26 @@ ApplicationWindow {
         color: "darkgray"
     }
 
-    Button{
+    Column{
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: 20
-        text: qsTr("New page")
+        spacing: 5
 
-        onClicked: {
-            noteBook.foldPage();
+        Button{
+            text: qsTr("New page")
+
+            onClicked: {
+                noteBook.foldPage();
+            }
+        }
+
+        Button{
+            text: qsTr("Clear Model")
+
+            onClicked: {
+                boardModel.clearBoard();
+            }
         }
     }
 
