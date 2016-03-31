@@ -20,3 +20,7 @@ else:unix: LIBS += -L$$OUT_PWD/../Library/Core/ -lCore
 
 INCLUDEPATH += $$PWD/../Library/Core
 DEPENDPATH += $$PWD/../Library/Core
+
+DISTFILES += \
+    NoteBook.qml \
+    BoardView.qml
