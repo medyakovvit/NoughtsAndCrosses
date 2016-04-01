@@ -20,6 +20,14 @@ ApplicationWindow {
         spacing: 5
 
         Button{
+            text: qsTr("New game")
+
+            onClicked: {
+                myGame.start();
+            }
+        }
+
+        Button{
             text: qsTr("New page")
 
             onClicked: {

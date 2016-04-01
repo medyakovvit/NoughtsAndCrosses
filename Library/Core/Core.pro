@@ -12,11 +12,13 @@ TEMPLATE = lib
 DEFINES += CORE_LIBRARY
 
 SOURCES += core.cpp \
-    boardmodel.cpp
+    boardmodel.cpp \
+    game.cpp
 
 HEADERS += core.h\
         core_global.h \
-    boardmodel.h
+    boardmodel.h \
+    game.h
 
 unix {
     target.path = /usr/lib

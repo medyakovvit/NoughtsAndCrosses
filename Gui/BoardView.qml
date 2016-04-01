@@ -5,9 +5,9 @@ import QtQuick.Controls 1.4
 Item {
     id: rootItem
 
-    Button{
-        text: "click"
-        onClicked: lineAnim.start();
+    Connections{
+        target: myGame
+        onStarted: lineAnim.start()
     }
 
     Canvas{
@@ -17,10 +17,7 @@ Item {
         property point pnt1: Qt.point(width*1/3, 0)
         property point pnt2: Qt.point(width*1/3, height)
         property int lw: 0
-//        Component.onCompleted: {
-//            console.log("onCompleted");
-//            lineAnim.start();//state = "drawLine"
-//        }
+
         onHeightChanged: console.log("Height: " + height)
 
         onLwChanged: {
