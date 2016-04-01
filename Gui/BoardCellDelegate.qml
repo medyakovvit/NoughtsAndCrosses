@@ -1,6 +1,5 @@
 import QtQuick 2.0
 
-
 Item{
     id: item
     property alias cellSymbol: canvas.symbol
@@ -160,7 +159,9 @@ Item{
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                boardModel.setSymbol("x", index);
+                if(myGame.activePlayer)
+                    myGame.activePlayer.mark(index);
+                //boardModel.setSymbol("x", index);
             }
         }
     }

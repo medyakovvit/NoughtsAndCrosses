@@ -4,6 +4,7 @@
 
 #include <boardmodel.h>
 #include <game.h>
+#include <player.h>
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +14,10 @@ int main(int argc, char *argv[])
 
     BoardModel model;
     Game game;
+
+    //qmlRegisterType<Player>("my.X_And_O.Player", 1, 0, "Player");
+    qmlRegisterUncreatableType<Player>("my.X_And_O.Player", 1, 0, "Player",
+                                       QString("Player is uncreatable in qml"));
     engine.rootContext()->setContextProperty("boardModel", &model);
     engine.rootContext()->setContextProperty("myGame", &game);
 

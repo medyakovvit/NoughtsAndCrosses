@@ -18,10 +18,7 @@ Item {
         property point pnt2: Qt.point(width*1/3, height)
         property int lw: 0
 
-        onHeightChanged: console.log("Height: " + height)
-
         onLwChanged: {
-            console.log(lw);
             requestPaint();
         }
 
@@ -89,7 +86,7 @@ Item {
         cellHeight: height/3
         cellWidth: width/3
 
-        model: boardModel
+        model: myGame.board
         delegate: BoardCellDelegate{
                 width: grid.cellWidth
                 height: grid.cellHeight

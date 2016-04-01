@@ -1,7 +1,7 @@
 #include "player.h"
 
-Player::Player(QString playerName, QObject *parent) : QObject(parent),
-    m_name(playerName)
+Player::Player(QString symbol, QString playerName, BoardModel *board, QObject *parent) : QObject(parent),
+    m_active(false), m_name(playerName), m_symbol(symbol), p_board(board)
 {
 
 }
@@ -46,4 +46,21 @@ void Player::setNextPlayer(Player *aPlayer)
 
     p_nextPlayer = aPlayer;
     emit nextPlayerChanged(aPlayer);
+}
+
+void Player::setBoard(BoardModel *board)
+{
+    if(p_board == board)
+        return;
+
+    p_board = board;
+}
+
+void Player::mark(int index)
+{
+    if(p_board)
+    {
+        p_board->setSymbol(this->m_symbol, index);
+        emit marked();
+    }
 }
