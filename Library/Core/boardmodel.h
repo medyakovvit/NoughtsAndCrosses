@@ -18,6 +18,8 @@ class CORESHARED_EXPORT BoardModel : public QAbstractListModel
 public:
     explicit BoardModel(QObject *parent = 0);
 
+    QVector<QString> items()const{return m_items;}
+
     // QAbstractItemModel interface
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
