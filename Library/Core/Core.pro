@@ -14,13 +14,15 @@ DEFINES += CORE_LIBRARY
 SOURCES += core.cpp \
     boardmodel.cpp \
     game.cpp \
-    player.cpp
+    player.cpp \
+    referee.cpp
 
 HEADERS += core.h\
         core_global.h \
     boardmodel.h \
     game.h \
-    player.h
+    player.h \
+    referee.h
 
 unix {
     target.path = /usr/lib
