@@ -1,6 +1,9 @@
 #include "game.h"
 
-Game::Game(QObject *parent) : QObject(parent)
+#include "referee.h"
+
+Game::Game(QObject *parent) : QObject(parent),
+    m_moveCounter(0)
 {
     p_board = new BoardModel(this);
 
@@ -21,6 +24,24 @@ void Game::start()
     emit started();
 }
 
+void Game::reset()
+{
+    if(p_board)
+    {
+        p_board->clearBoard();
+        emit reseted();
+    }
+
+    if(p_activePlayer != p_firstPlayer)
+    {
+        if(p_activePlayer)
+            p_activePlayer->setActive(false);
+        p_activePlayer = p_firstPlayer;
+        if(p_activePlayer)
+            p_activePlayer->setActive(true);
+    }
+}
+
 void Game::nextPlayer()
 {
     if(p_activePlayer)
@@ -34,5 +55,28 @@ void Game::nextPlayer()
 
 void Game::on_activePlayerMarked()
 {
-    this->nextPlayer();
+    if(!p_board)
+        return;
+
+    m_moveCounter++;
+    if(m_moveCounter >=5)
+    {
+        Referee referee;
+        QString res = referee.checkWinner(p_board->items());
+
+        if(res == "Draw")
+            emit draw();
+        else if(res == "x")
+        {
+            if(p_firstPlayer)
+                p_firstPlayer->win();
+        }
+        else if(res == "o")
+        {
+            if(p_secondPlayer)
+                p_secondPlayer->win();
+        }
+        else
+            this->nextPlayer();
+    }
 }

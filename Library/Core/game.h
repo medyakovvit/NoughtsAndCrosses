@@ -25,19 +25,24 @@ public:
 
 signals:
     void started();
+    void reseted();
     void firstPlayerChanged(Player* first);
     void secondPlayerChanged(Player* srcond);
     void activePlayerChanged(Player* active);
     void boardChanged(BoardModel* board);
 
+    void draw();
+
 public slots:
     void start();
+    void reset();
     void nextPlayer();
 
 protected slots:
     void on_activePlayerMarked();
 
 protected:
+    int m_moveCounter;
     Player* p_firstPlayer;
     Player* p_secondPlayer;
     Player* p_activePlayer;
