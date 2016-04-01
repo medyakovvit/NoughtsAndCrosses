@@ -79,8 +79,11 @@ Rectangle{
             from: ""
             to: "fold"
             onRunningChanged: {
-                if(!running)
+                if(!running){
+                    myGame.reset();
                     foldedPage.reset();
+                    hidingRect.height = 0;
+                }
             }
 
             ParallelAnimation{
@@ -147,6 +150,8 @@ Rectangle{
         anchors.left: foldedPage.left
         anchors.right: foldedPage.right
         anchors.bottom: pageRect.bottom
+        border.color: pageRect.border.color
+        border.width: pageRect.border.width
         //anchors.top: foldedPage.bottom
     }
 }
