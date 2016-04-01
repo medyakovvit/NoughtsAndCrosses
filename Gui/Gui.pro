@@ -24,4 +24,5 @@ DEPENDPATH += $$PWD/../Library/Core
 DISTFILES += \
     NoteBook.qml \
     BoardView.qml \
-    BoardCellDelegate.qml
+    BoardCellDelegate.qml \
+    PlayerInfo.qml

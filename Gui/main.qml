@@ -13,6 +13,22 @@ ApplicationWindow {
         color: "darkgray"
     }
 
+    PlayerInfo{
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        width: 100
+        height: 100
+        player: myGame.firstPlayer
+    }
+
+    PlayerInfo{
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        width: 100
+        height: 100
+        player: myGame.secondPlayer
+    }
+
     Column{
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
@@ -40,6 +56,14 @@ ApplicationWindow {
 
             onClicked: {
                 boardModel.clearBoard();
+            }
+        }
+
+        Button{
+            text: qsTr("Next player")
+
+            onClicked: {
+                myGame.nextPlayer();
             }
         }
     }

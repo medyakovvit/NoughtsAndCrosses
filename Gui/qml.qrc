@@ -4,5 +4,6 @@
         <file>BoardView.qml</file>
         <file>NoteBook.qml</file>
         <file>BoardCellDelegate.qml</file>
+        <file>PlayerInfo.qml</file>
     </qresource>
 </RCC>
