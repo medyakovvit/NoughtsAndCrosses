@@ -6,6 +6,12 @@ Player::Player(QString symbol, QString playerName, BoardModel *board, QObject *p
 
 }
 
+void Player::win()
+{
+    addWin();
+    emit won();
+}
+
 void Player::addWin()
 {
     m_wins++;

@@ -32,8 +32,10 @@ signals:
     void activeChanged(bool isActive);
     void nextPlayerChanged(Player* next);
     void marked();
+    void won();
 
 public slots:
+    void win();
     void addWin();
     void setWins(int w);
     void setName(const QString& newName);
