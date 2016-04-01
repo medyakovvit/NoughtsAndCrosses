@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>BoardView.qml</file>
         <file>NoteBook.qml</file>
+        <file>BoardCellDelegate.qml</file>
     </qresource>
 </RCC>

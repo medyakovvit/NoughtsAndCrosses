@@ -1,32 +1,102 @@
-import QtQuick 2.0
+import QtQuick 2.5
+import QtPositioning 5.3
+import QtQuick.Controls 1.4
 
 Item {
+    id: rootItem
+
+    Button{
+        text: "click"
+        onClicked: lineAnim.start();
+    }
+
+    Canvas{
+        id: canvas
+        anchors.fill: parent
+        anchors.margins: 50
+        property point pnt1: Qt.point(width*1/3, 0)
+        property point pnt2: Qt.point(width*1/3, height)
+        property int lw: 0
+//        Component.onCompleted: {
+//            console.log("onCompleted");
+//            lineAnim.start();//state = "drawLine"
+//        }
+        onHeightChanged: console.log("Height: " + height)
+
+        onLwChanged: {
+            console.log(lw);
+            requestPaint();
+        }
+
+        onPaint: {
+            var cntx = canvas.getContext('2d');
+            cntx.clearRect(0, 0, width, height);
+            cntx.strokeStyle = "black";
+            cntx.lineWidth = 1
+            cntx.beginPath();
+
+            cntx.moveTo(pnt1.x, pnt1.y);
+            cntx.lineTo(pnt1.x, pnt1.y+lw);
+
+            // vertical lines
+            cntx.moveTo(width*2/3, 0);
+            cntx.lineTo(width*2/3, height);
+
+            //horizontal lines
+            cntx.moveTo(0, height*1/3);
+            cntx.lineTo(width, height*1/3);
+            cntx.moveTo(0, height*2/3);
+            cntx.lineTo(width, height*2/3);
+
+            cntx.stroke();
+            cntx.restore();
+        }
+
+//        states: [
+//            State {
+//                name: "drawLine"
+//                PropertyChanges {
+//                    target: canvas
+//                    lw: canvas.height
+//                }
+//            }
+//        ]
+
+//        transitions: [
+//            Transition {
+//                to: "drawLine"
+//                PropertyAnimation {
+//                    target: canvas
+//                    property: "lw"
+//                    to: 300//rootItem.height
+//                    duration: 1000
+//                    //running: true
+//                }
+//            }
+//        ]
+
+        NumberAnimation{
+            id: lineAnim
+            target: canvas
+            property: "lw"
+            //from: 0
+            to: canvas.height
+            duration: 1000
+            //running: true
+        }
+    }
+
     GridView{
         id: grid
-        anchors.fill: parent
-        //anchors.centerIn: parent
-        //width: 08*parent.width
-        //height: width
+        anchors.fill: canvas
         cellHeight: height/3
         cellWidth: width/3
 
         model: boardModel
-        delegate: Component{
-            Item{
+        delegate: BoardCellDelegate{
                 width: grid.cellWidth
                 height: grid.cellHeight
-                Rectangle{
-                    anchors.fill: parent
-                    anchors.margins: 10
-                    border.color: "black"
-                    border.width: 1
-
-                    MouseArea{
-                        anchors.fill: parent
-                        onClicked: boardModel.setSymbol("x", index);
-                    }
-                }
-            }
+                cellSymbol: symbol
         }
     }
 }
