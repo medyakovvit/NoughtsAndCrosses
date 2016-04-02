@@ -6,6 +6,11 @@
 #include <QObject>
 #include "boardmodel.h"
 
+/*!
+ * \brief The Player class
+ *
+ */
+
 class CORESHARED_EXPORT Player : public QObject
 {
     Q_OBJECT
@@ -36,12 +41,19 @@ signals:
 
 public slots:
     void win();
+
+    /*! Add 1 to the player's wins*/
     void addWin();
     void setWins(int w);
     void setName(const QString& newName);
     void setActive(bool a);
     void setNextPlayer(Player* aPlayer);
     void setBoard(BoardModel* board);
+
+    /*!
+     * Mark cell at index with symbol
+     * @param index an integer argument
+    */
     void mark(int index);
 
 protected:

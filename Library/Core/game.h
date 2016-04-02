@@ -7,6 +7,13 @@
 
 #include "player.h"
 
+/*!
+ * \class Game
+ * \brief The Game class
+ *
+ * Holds players, board model, referee
+ */
+
 class CORESHARED_EXPORT Game : public QObject
 {
     Q_OBJECT
@@ -40,8 +47,13 @@ signals:
     void draw();
 
 public slots:
+    /*! Start a game */
     void start();
+
+    /*! Reset game: clear board*/
     void reset();
+
+    /*! Activate next player to make move */
     void nextPlayer();
 
 protected slots:
