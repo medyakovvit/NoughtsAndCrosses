@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player(QString symbol, QString playerName, BoardModel *board, QObject *parent) : QObject(parent),
-    m_active(false), m_name(playerName), m_symbol(symbol), p_board(board)
+    m_active(false), m_wins(0), m_name(playerName), m_symbol(symbol), p_board(board)
 {
 
 }
