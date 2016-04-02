@@ -27,5 +27,5 @@ QString Referee::checkWinner(const QVector<QString> &board)
         return board[8];
 
     // Draw
-    return QString("Draw");
+    return QString();
 }

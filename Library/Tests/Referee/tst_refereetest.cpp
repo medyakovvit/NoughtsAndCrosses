@@ -109,7 +109,7 @@ void RefereeTest::bottomRow()
 
 void RefereeTest::draw()
 {
-    QString expected = "Draw";
+    QString expected = "";
     board[0]="x"; board[1]="x"; board[2]="o";
     board[3]="o"; board[4]="o"; board[5]="x";
     board[6]="x"; board[7]="o"; board[8]="x";
