@@ -1,5 +1,5 @@
 import QtQuick 2.5
-//import my.X_And_O.Player 1.0
+import QtQuick.Layouts 1.1
 
 Item {
     id: rootItem
@@ -8,12 +8,20 @@ Item {
     Connections{
         target: rootItem.player
         onActiveChanged: highlighter.isActive = rootItem.player.active
+        onWinsChanged: playerWins.text = wins
+        onWon: winnerRect.state = "win"
+    }
+
+    Connections{
+        target: myGame
+        onReseted: winnerRect.state = ""
     }
 
     onPlayerChanged: {
         if(player){
             highlighter.isActive = player.active;
             playerName.text = player.name;
+            playerWins.text = player.wins;
         }
     }
 
@@ -60,13 +68,72 @@ Item {
     }
 
     Rectangle{
+        id: rectInfo
         anchors.centerIn: highlighter
         width: 0.9*highlighter.width
         height: 0.9*highlighter.height
 
-        Text{
-            id: playerName
-            anchors.centerIn: parent
+        ColumnLayout{
+            anchors.fill: parent
+            anchors.margins: 5
+
+            RowLayout{
+                Text{text: qsTr("Name:")}
+                Text{
+                    id: playerName
+                    Layout.fillWidth: true
+                }
+            }
+
+            RowLayout{
+                Text{text: qsTr("Wins:")}
+                Text{
+                    id: playerWins
+                    Layout.fillWidth: true
+                }
+            }
         }
+    }
+
+    Rectangle{
+        id: winnerRect
+        width: rectInfo.width
+        height: rectInfo.height/3
+        radius: 5
+        color: "lightgreen"
+        anchors.horizontalCenter: rectInfo.horizontalCenter
+        y: highlighter.y+highlighter.height
+
+        Text{
+            anchors.centerIn: parent
+            text: qsTr("Winner")
+        }
+
+        states: [
+            State{
+                name: ""
+                PropertyChanges {
+                    target: winnerRect
+                    y: highlighter.y+highlighter.height
+                }
+            },
+            State{
+                name: "win"
+                PropertyChanges {
+                    target: winnerRect
+                    y: highlighter.y+(highlighter.height-winnerRect.height)/2
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                SmoothedAnimation{
+                    target: winnerRect
+                    property: "y"
+                    duration: 500
+                }
+            }
+        ]
     }
 }
