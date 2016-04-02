@@ -1,4 +1,5 @@
 TEMPLATE = app
+TARGET = NoughtsAndCrosses
 
 QT += qml quick
 
@@ -20,9 +21,6 @@ else:unix: LIBS += -L$$OUT_PWD/../Library/Core/ -lCore
 
 INCLUDEPATH += $$PWD/../Library/Core
 DEPENDPATH += $$PWD/../Library/Core
-
-target.path = $$PWD/../../NoughtsAndCrosses-install
-INSTALLS += target
 
 DISTFILES += \
     NoteBook.qml \
