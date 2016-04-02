@@ -83,6 +83,7 @@ Rectangle{
                     myGame.reset();
                     foldedPage.reset();
                     hidingRect.height = 0;
+                    myGame.start();
                 }
             }
 
@@ -152,6 +153,5 @@ Rectangle{
         anchors.bottom: pageRect.bottom
         border.color: pageRect.border.color
         border.width: pageRect.border.width
-        //anchors.top: foldedPage.bottom
     }
 }
