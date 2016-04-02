@@ -12,7 +12,9 @@ Game::Game(QObject *parent) : QObject(parent),
     p_secondPlayer = new Player("o", "Player2", p_board, this);
 
     connect(p_firstPlayer, &Player::marked, this, &Game::on_activePlayerMarked);
+    connect(p_firstPlayer, &Player::won, this, &Game::on_someoneWon);
     connect(p_secondPlayer, &Player::marked, this, &Game::on_activePlayerMarked);
+    connect(p_secondPlayer, &Player::won, this, &Game::on_someoneWon);
 
     p_firstPlayer->setNextPlayer(p_secondPlayer);
     p_secondPlayer->setNextPlayer(p_firstPlayer);
@@ -21,11 +23,7 @@ Game::Game(QObject *parent) : QObject(parent),
 
 void Game::start()
 {
-    if(m_active != true)
-    {
-        m_active = true;
-        emit activeChanged(m_active);
-    }
+    this->setActive(true);
     emit started();
 }
 
@@ -63,6 +61,9 @@ void Game::on_activePlayerMarked()
     if(!p_board)
         return;
 
+    if(!m_active)
+        return;
+
     m_moveCounter++;
     if(m_moveCounter >=5)
     {
@@ -86,4 +87,18 @@ void Game::on_activePlayerMarked()
     }
     else
         this->nextPlayer();
+}
+
+void Game::setActive(bool a)
+{
+    if(m_active == a)
+        return;
+
+    m_active = a;
+    emit activeChanged(a);
+}
+
+void Game::on_someoneWon()
+{
+    this->setActive(false);
 }

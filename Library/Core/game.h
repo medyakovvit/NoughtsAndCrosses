@@ -14,7 +14,7 @@ class CORESHARED_EXPORT Game : public QObject
     Q_PROPERTY(Player* secondPlayer READ secondPlayer NOTIFY secondPlayerChanged)
     Q_PROPERTY(Player* activePlayer READ activePlayer NOTIFY activePlayerChanged)
     Q_PROPERTY(BoardModel* board READ board NOTIFY boardChanged)
-    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
 
 public:
     explicit Game(QObject *parent = 0);
@@ -43,6 +43,8 @@ public slots:
 
 protected slots:
     void on_activePlayerMarked();
+    void setActive(bool a);
+    void on_someoneWon();
 
 protected:
     int m_moveCounter;
