@@ -24,6 +24,11 @@ HEADERS += core.h\
     player.h \
     referee.h
 
+win32 {
+    target.path = $$PWD/../../../NoughtsAndCrosses-install
+    INSTALLS += target
+}
+
 unix {
     target.path = /usr/lib
     INSTALLS += target
