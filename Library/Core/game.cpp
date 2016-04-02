@@ -3,7 +3,7 @@
 #include "referee.h"
 
 Game::Game(QObject *parent) : QObject(parent),
-    m_moveCounter(0), m_active(false)
+    m_moveCounter(0), m_active(false), m_firstRun(true)
 {
     p_board = new BoardModel(this);
 
@@ -23,6 +23,7 @@ Game::Game(QObject *parent) : QObject(parent),
 
 void Game::start()
 {
+    m_firstRun = false;
     this->setActive(true);
     emit started();
 }

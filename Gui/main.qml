@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.1
 
 ApplicationWindow {
     id: mainWindow
@@ -13,69 +14,61 @@ ApplicationWindow {
         color: "darkgray"
     }
 
-    PlayerInfo{
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        width: 100
-        height: 100
-        player: myGame.firstPlayer
-    }
+    RowLayout{
+        anchors.fill: parent
 
-    PlayerInfo{
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        width: 100
-        height: 100
-        player: myGame.secondPlayer
-    }
+        ColumnLayout{
+            z: 1
+            Layout.fillHeight: true
+            Layout.minimumWidth: 100
 
-    Column{
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-        spacing: 5
+            //Button new game and Player1 Info
+            Item{
+                Layout.minimumWidth: 100
+                Layout.fillHeight: true
+                Button{
+                    anchors.centerIn: parent
+                    text: qsTr("New game")
 
-        Button{
-            text: qsTr("New game")
+                    onClicked: {
+                        if(myGame.firstRun)
+                            myGame.start();
+                        else
+                            noteBook.foldPage();
+                    }
+                }
+            }
 
-            onClicked: {
-                if(myGame.active)
-                    noteBook.foldPage();
-                //myGame.reset();
-                else
-                    myGame.start();
+            PlayerInfo{
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+                Layout.minimumWidth: 100
+                Layout.minimumHeight: 100
+                player: myGame.firstPlayer
             }
         }
 
-        Button{
-            text: qsTr("New page")
+        // Notebook
+        Item{
+            z: 0
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.minimumHeight: 150
 
-            onClicked: {
-                noteBook.foldPage();
+            NoteBook{
+                id: noteBook
+                anchors.centerIn: parent
+                height: parent.height*0.90
+                width: height*0.7
             }
         }
 
-        Button{
-            text: qsTr("Clear Model")
-
-            onClicked: {
-                myGame.clearBoard();
-            }
+        //Player2 Info
+        PlayerInfo{
+            z: 1
+            Layout.alignment: Qt.AlignRight | Qt.AlignBottom
+            Layout.minimumWidth: 100
+            Layout.minimumHeight: 100
+            player: myGame.secondPlayer
         }
-
-        Button{
-            text: qsTr("Next player")
-
-            onClicked: {
-                myGame.nextPlayer();
-            }
-        }
-    }
-
-    NoteBook{
-        id: noteBook
-        anchors.centerIn: parent
-        height: parent.height*0.90
-        width: height*0.7
     }
 }

@@ -15,6 +15,7 @@ class CORESHARED_EXPORT Game : public QObject
     Q_PROPERTY(Player* activePlayer READ activePlayer NOTIFY activePlayerChanged)
     Q_PROPERTY(BoardModel* board READ board NOTIFY boardChanged)
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(bool firstRun READ firstRun NOTIFY firstRunChanged)
 
 public:
     explicit Game(QObject *parent = 0);
@@ -24,6 +25,7 @@ public:
     Player* activePlayer()const{return p_activePlayer;}
     BoardModel* board()const{return p_board;}
     bool active()const{return m_active;}
+    bool firstRun()const{return m_firstRun;}
 
 signals:
     void started();
@@ -33,6 +35,7 @@ signals:
     void activePlayerChanged(Player* active);
     void boardChanged(BoardModel* board);
     void activeChanged(bool isActive);
+    void firstRunChanged(bool isFirstRun);
 
     void draw();
 
@@ -48,7 +51,8 @@ protected slots:
 
 protected:
     int m_moveCounter;
-    int m_active;
+    bool m_active;
+    bool m_firstRun;
     Player* p_firstPlayer;
     Player* p_secondPlayer;
     Player* p_activePlayer;

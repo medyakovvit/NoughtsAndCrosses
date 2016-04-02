@@ -154,6 +154,7 @@ Item {
         anchors.fill: canvas
         cellHeight: height/3
         cellWidth: width/3
+        interactive: false
 
         model: myGame.board
         delegate: BoardCellDelegate{
