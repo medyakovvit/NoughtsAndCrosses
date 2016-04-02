@@ -29,7 +29,7 @@ public:
 signals:
 
 public slots:
-    void setSymbol(QString symbol, int row);
+    bool setSymbol(QString symbol, int row);
     QString symbolAt(int row)const;
     void clearBoard();
 

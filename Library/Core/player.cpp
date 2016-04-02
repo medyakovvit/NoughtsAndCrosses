@@ -66,7 +66,7 @@ void Player::mark(int index)
 {
     if(p_board)
     {
-        p_board->setSymbol(this->m_symbol, index);
-        emit marked();
+        if(p_board->setSymbol(this->m_symbol, index))
+            emit marked();
     }
 }

@@ -45,19 +45,19 @@ bool BoardModel::setData(const QModelIndex &index, const QVariant &value, int ro
         return false;
 
     QString symbol = value.toString();
-    if(m_items[index.row()] != symbol)
+    if(m_items[index.row()] == "" && m_items[index.row()] != symbol)
     {
         m_items[index.row()] = symbol;
         emit dataChanged(index, index);
         return true;
     }
-    else
-        return false;
+
+    return false;
 }
 
-void BoardModel::setSymbol(QString symbol, int row)
+bool BoardModel::setSymbol(QString symbol, int row)
 {
-    this->setData(createIndex(row, 0), QVariant(symbol), Qt::EditRole);
+    return this->setData(createIndex(row, 0), QVariant(symbol), Qt::EditRole);
 }
 
 QString BoardModel::symbolAt(int row) const
@@ -69,6 +69,8 @@ void BoardModel::clearBoard()
 {
     for(int i=0; i<m_items.size(); i++)
     {
-        this->setData(createIndex(i, 0), QVariant(), Qt::EditRole);
+        //this->setData(createIndex(i, 0), QVariant(), Qt::EditRole);
+        m_items[i] = "";
     }
+    emit dataChanged(createIndex(0,0), createIndex(m_items.size()-1,0));
 }
