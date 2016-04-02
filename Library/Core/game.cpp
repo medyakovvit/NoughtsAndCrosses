@@ -3,7 +3,7 @@
 #include "referee.h"
 
 Game::Game(QObject *parent) : QObject(parent),
-    m_moveCounter(0)
+    m_moveCounter(0), m_active(false)
 {
     p_board = new BoardModel(this);
 
@@ -21,6 +21,11 @@ Game::Game(QObject *parent) : QObject(parent),
 
 void Game::start()
 {
+    if(m_active != true)
+    {
+        m_active = true;
+        emit activeChanged(m_active);
+    }
     emit started();
 }
 
@@ -64,7 +69,7 @@ void Game::on_activePlayerMarked()
         Referee referee;
         QString res = referee.checkWinner(p_board->items());
 
-        if(res == "Draw")
+        if(res == "" && m_moveCounter == 9)
             emit draw();
         else if(res == "x")
         {
@@ -79,4 +84,6 @@ void Game::on_activePlayerMarked()
         else
             this->nextPlayer();
     }
+    else
+        this->nextPlayer();
 }

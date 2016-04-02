@@ -39,7 +39,11 @@ ApplicationWindow {
             text: qsTr("New game")
 
             onClicked: {
-                myGame.start();
+                if(myGame.active)
+                    noteBook.foldPage();
+                //myGame.reset();
+                else
+                    myGame.start();
             }
         }
 
@@ -55,7 +59,7 @@ ApplicationWindow {
             text: qsTr("Clear Model")
 
             onClicked: {
-                boardModel.clearBoard();
+                myGame.clearBoard();
             }
         }
 
