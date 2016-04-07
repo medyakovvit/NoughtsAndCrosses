@@ -5,7 +5,8 @@
 
 #include <QObject>
 
-#include "player.h"
+class Player;
+class BoardModel;
 
 /*!
  * \class Game

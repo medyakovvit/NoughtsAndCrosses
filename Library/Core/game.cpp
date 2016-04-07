@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include "player.h"
+#include "boardmodel.h"
 #include "referee.h"
 
 Game::Game(QObject *parent) : QObject(parent),

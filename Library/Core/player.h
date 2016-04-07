@@ -4,7 +4,8 @@
 #include "core_global.h"
 
 #include <QObject>
-#include "boardmodel.h"
+
+class BoardModel;
 
 /*!
  * \brief The Player class
